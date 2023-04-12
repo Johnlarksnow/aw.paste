@@ -17,7 +17,7 @@ app.post('/upload', (req, res) => {
   const text = req.body.text;
   const id = nanoid(); // Generate a random ID
   data[id] = text; // Store the text data in an object with the ID as the key
-  const url = `http://localhost:${port}/${id}`; // Create the URL
+  const url = `https://aw-paste.vercel.app/:${port}/${id}`; // Create the URL
   res.status(200).send(url); // Send the URL back to the client
 });
 
