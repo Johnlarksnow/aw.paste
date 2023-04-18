@@ -1,5 +1,4 @@
 
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -7,7 +6,7 @@ const { nanoid } = require('nanoid');
 
 const app = express();
 app.use(express.static('public'));
-const port = 3000;
+const port = process.env.PORT || 3000;
 const data = {};
 
 app.use(bodyParser.json());
@@ -15,10 +14,10 @@ app.use(cors());
 
 app.post('/upload', (req, res) => {
   const text = req.body.text;
-  const id = nanoid(); // Generate a random ID
-  data[id] = text; // Store the text data in an object with the ID as the key
-  const url = `https://aw-paste.vercel.app/:${port}/${id}`; // Create the URL
-  res.status(200).send(url); // Send the URL back to the client
+  const id = nanoid();
+  data[id] = text;
+  const url = `https://aw-paste.vercel.app/${id}`;
+  res.status(200).send(url);
 });
 
 app.get('/:id', (req, res) => {
